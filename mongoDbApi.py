@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 class MongoAPI:
     def __init__(self, data):
-        self.client = MongoClient("mongodb://localhost:27018/")
+        self.client = MongoClient("mongodb://mongoTest:27017/IshmeetDB")
         database = data['database']
         collection = data['collection']
         cursor = self.client[database]

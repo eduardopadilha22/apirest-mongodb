@@ -1,10 +1,16 @@
 version: "3"
+
 services:
   mongodb:
     image: mongo:latest
     container_name: mongoTest
+    hostname: mongo
+    environment:
+       MONGO_INITDB_DATABASE: IshmeetDB
     ports:
-    - "27018:27017"
+      - "27017:27017"
+    volumes:
+      - ./mongodb_data_container:/docker-entrypoint-initdb.d
     networks:
       - netApi
     restart: always
@@ -12,12 +18,12 @@ services:
   api-test:
     build: .
     container_name: api-python
-    depends_on:
-      - mongodb
     hostname: apitest
     restart: always
     ports:
       - "5001:5001"
+    depends_on:
+      - mongodb
     networks:
       - netApi
 
